@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS formValidation ~ amar</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+        crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+    <div class="card bg-white p-4 shadow-lg">
+        <p class="display-4 text-center underline">Form validation</p>
+        <form name="myform" method="post" novalidate>
+
+            <div class="d-flex">
+                <div class="form-group mr-4">
+                    <label class="label-default"></label>
+                    <input type="text" name="firstName" class="form-control" placeholder="First Name*" onfocus="clearErr(this); classLableStyle(this)" onblur="userNameValidation(this); classLabelDefault(this); validateBlank(this); "
+                        required />
+                    <div></div>
+                </div>
+                <!--form group ~ first name-->
+
+                <div class="form-group">
+                    <label class="label-default"></label>
+                    <input type="text" name="lastName" placeholder="Last Name*" class="form-control" onfocus="clearErr(this); classLableStyle(this)" onblur="classLabelDefault(this); userNameValidation(this); validateBlank(this);"
+                        required />
+                    <div></div>
+                </div>
+                <!--form group ~ last name-->
+            </div>
+
+            <div class="d-flex">
+                <div class="form-group mr-4">
+                    <label class="label-default"></label>
+                    <input type="text" name="pincode" placeholder="Pincode" class="form-control" onfocus="clearErr(this); classLableStyle(this)" oninput="pincodeValidation(this)" onblur="classLabelDefault(this)"
+                        maxlength="6">
+                    <div></div>
+                </div>
+                <!--form group ~ pincode-->
+
+                <div class="form-group">
+                    <label class="label-default" for="birthdate"></label>
+                    <input name="birthdate" placeholder="Birthdate" class="form-control" type="text" onfocus="clearErr(this); classLableStyle(this)" oninput="birthdateValidation(this);"  onblur="classLabelDefault(this)" maxlength="10">
+                    <div></div>
+                </div>
+                <!--form group ~ birthdate-->
+            </div>
+
+            <div class="d-flex">
+                <div class="form-group mr-4">
+                    <label class="label-default" for="email"></label>
+                    <input name="email" placeholder="Email*" class="form-control" type="email" onfocus="clearErr(this); classLableStyle(this)" onblur="classLabelDefault(this); emailValidation(this); validateBlank(this);"
+                        required />
+                    <div></div>
+                </div>
+                <!--form group ~ email-->
+
+                <div class="form-group">
+                    <label class="label-default" for="url"></label>
+                    <input name="url" placeholder="Website URL" class="form-control" type="text" onfocus="clearErr(this); classLableStyle(this)" oninput="urlValidation(this);" onblur="classLabelDefault(this)">
+                    <div></div>
+                </div>
+                <!--form group ~ url-->
+            </div>
+
+            <div class="d-flex">
+                <div class="form-group mr-4">
+                    <label class="label-default" for="password"></label>
+                    <input name="password" placeholder="Password*" class="form-control" type="password" onfocus="clearErr(this); clearConfirmPassword(); classLableStyle(this)"
+                        onblur="classLabelDefault(this); passwordValidation(this); validateBlank(this);" required />
+                    <div></div>
+                </div>
+                <!--form group ~ password-->
+
+                <div class="form-group">
+                    <label class="label-default" for="confirmPassword"></label>
+                    <input name="confirmPassword" placeholder="Confirm password*" class="form-control" type="password" onfocus="clearErr(this); classLableStyle(this)" onblur="classLabelDefault(this); confirmPasswordValidation(this); validateBlank(this);"
+                        required />
+                    <div></div>
+                </div>
+                <!--form group ~ confirmPassword-->
+            </div>
+
+            <div class="form-group">
+                <label class="label-default" for="comments"></label>
+                <textarea name="comment" id="comment" placeholder="Comments" class="form-control" cols="1" rows="3" oninput="textCount(this)" onfocus="classLableStyle(this);"
+                    onblur=" classLabelDefault(this); clearErr(this);" maxlength="100"></textarea>
+                <div></div>
+            </div>
+
+            <button class="btn btn-primary">submit</button>
+        </form>
+
+    </div>
+    <!--container-->
+
+    <script>
+    var myform = document.getElementsByName('myform')[0];
+
+myform.addEventListener('submit', validateForm);
+
+function validateForm(event) {
+
+    var firstName = this.firstName.value;
+
+    if (userNameValidation(firstName) == false) {
+        event.preventDefault();
+    }
+
+    var lastName = this.lastName.value;
+
+    if (userNameValidation(lastName) == false) {
+        event.preventDefault();
+    }
+
+    var pincode = this.pincode.value;
+
+    if (pincodeValidation(pincode) == false) {
+        event.preventDefault();
+    }
+
+    var birthdate = this.birthdate.value;
+
+    if (birthdateValidation(birthdate) == false) {
+        event.preventDefault();
+    }
+
+    var email = this.email.value;
+
+    if (emailValidation(email) == false) {
+        event.preventDefault();
+    }
+
+    var url = this.url.value;
+
+    if (urlValidation(url) == false) {
+        event.preventDefault();
+    }
+
+    var password = this.password.value;
+
+    if (passwordValidation(password) == false) {
+        event.preventDefault();
+    }
+
+    var confirmPassword = this.confirmPassword.value;
+
+    if (confirmPasswordValidation(confirmPassword) == false) {
+        event.preventDefault();
+    }
+}
+
+// validate blank field
+
+function validateBlank(field) {
+
+    if (field.value == '') {
+        field.nextElementSibling.innerHTML = '<span class=\"icon mr-1\">&#xf057 </span> don\'t leave this field blank';
+        field.nextElementSibling.classList.add("text-danger");
+        field.classList.add("invalid_feild");
+    }
+}
+
+function classIfFalse(field) {
+    field.nextElementSibling.innerHTML = '<span class=\"icon mr-1\">&#xf057 </span> enter valid input';
+    field.classList.add("invalid_feild");
+    field.nextElementSibling.classList.add("text-danger");
+}
+
+function classIfTrue(field) {
+    field.nextElementSibling.innerHTML = '<span class=\"icon mr-1\">&#xf058 </span>';
+    field.classList.add("valid_feild");
+    field.nextElementSibling.classList.remove("text-danger");
+    field.nextElementSibling.classList.add("text-success");
+}
+
+//user name validation
+
+function userNameValidation(name) {
+    var namePattern = /^[a-zA-Z]+$/;
+
+    if (namePattern.test(name.value) == false) {
+        classIfFalse(name);
+        return false;
+    } else {
+        classIfTrue(name);
+    }
+}
+
+//pincode validation
+
+function pincodeValidation(pincode) {
+
+    var pincodePattern = /^\d{6}$/;
+
+    if (pincodePattern.test(pincode.value) == false) {
+        classIfFalse(pincode);
+        return false;
+    } else {
+        classIfTrue(pincode);
+    }
+}
+
+//birthdate validation
+
+function birthdateValidation(birthdate) {
+
+    var birthdatePattern = /^\d{1,2}\/\d{1,2}\/\d{2,4}$/;
+
+    if (birthdatePattern.test(birthdate.value) == false) {
+        classIfFalse(birthdate);
+        return false;
+    } else {
+        classIfTrue(birthdate);
+    }
+}
+
+//email validation
+
+function emailValidation(email) {
+
+    var emailPattern = /^[a-zA-Z0-9\.\-\_]+@[a-zA-Z0-9\.\-\_]+\.[a-z\.]{2,5}$/;
+
+    if (emailPattern.test(email.value) == false) {
+        classIfFalse(email);
+        return false;
+    } else {
+        classIfTrue(email);
+    }
+}
+
+//website url validation
+
+function urlValidation(url) {
+
+    var urlPattern = /^(http|https):\/\/(www.)?[a-zA-Z0-9\.\-\_]+[a-z\.]{2,5}$/;
+
+    if (urlPattern.test(url.value) == false) {
+        classIfFalse(url);
+        return false;
+    } else {
+        classIfTrue(url);
+    }
+}
+
+//password validation
+
+function passwordValidation(password) {
+    var num = false;
+    var special = false;
+    var capital = false;
+    var small = false;
+
+    if(password.value.match(/[a-z]/)){
+        small = true;
+    }
+
+    if (password.value.match(/[0-9]/)) {
+        num = true;
+    }
+
+    if (password.value.match(/\W/)) {
+        special = true;
+    }
+
+    if (password.value.match(/[A-Z]/)) {
+        capital = true;
+    }
+
+    if (password.value.length < 8){
+        classIfFalse(password);
+        return false;
+    } else if (num == true && special == true && capital == true && small == true) {
+        classIfTrue(password);
+    } else {
+        classIfFalse(password);
+        return false;
+    }
+}
+
+//confirm password validation
+
+function confirmPasswordValidation(confirmPassword) {
+
+    var password = document.getElementsByName("password")[0];
+
+    if (password.value == '') {
+        return true;
+    } else if (confirmPassword.value !== password.value) {
+        classIfFalse(confirmPassword);
+        return false;
+    } else {
+        classIfTrue(confirmPassword);
+    }
+}
+
+// Clear confirm password onfocus of password
+
+function clearConfirmPassword() {
+    var confirmPassword = document.getElementsByName("confirmPassword")[0];
+
+    confirmPassword.value = '';
+    confirmPassword.classList.remove("invalid_feild");
+    confirmPassword.classList.remove("valid_feild");
+    confirmPassword.nextElementSibling.innerHTML = '';
+}
+
+// textfield validation
+
+function textCount(textfield) {
+    var count = 100 - textfield.value.length;
+    textfield.nextElementSibling.innerHTML = count;
+    textfield.nextElementSibling.classList.add("text-danger");
+}
+
+// clear error function
+
+function clearErr(field) {
+    field.nextElementSibling.innerHTML = '';
+    field.classList.remove("invalid_feild");
+    field.classList.remove("valid_feild");
+}
+
+// function for label styling
+
+function classLableStyle(field) {
+    field.previousElementSibling.classList.remove("label-default");
+    field.previousElementSibling.classList.add("label-onfocus");
+    field.previousElementSibling.innerHTML=field.getAttribute("placeholder");
+    field.removeAttribute("placeholder");
+
+}
+
+function classLabelDefault(field){
+    field.previousElementSibling.classList.add("label-default");
+    field.previousElementSibling.classList.remove("label-onfocus");
+    field.setAttribute("placeholder", field.previousElementSibling.innerHTML);
+    field.previousElementSibling.innerHTML = "";
+}
+
+// function classClearStyle(field) {
+//     if (userNameValidation(field) == true) {
+//         field.removeAttribute("class");
+//         console.log('t');
+//     } else {
+//         return false;
+//     }
+// }
+</script>
+
+</body>
+
+</html>
