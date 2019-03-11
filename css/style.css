@@ -1,0 +1,74 @@
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: top ease 100ms; 
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(90deg, #0078D7, #0099BC);
+    font: 1rem/1.25 Open sans;
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-control{
+    background:transparent !important;
+}
+
+.label-default {
+    position: absolute;
+    top: .85rem;
+    left: 3rem;
+    margin: 0 !important;
+    margin-left:3rem;
+    font-size: 1.5rem;
+}
+
+.label-onfocus {
+    position: absolute;
+    padding: 0 .5rem;
+    top: -.5rem;
+    margin-left:.5rem;
+    font-size: 0.85rem;
+    background: #fff;
+    color: #0078D7;
+}
+
+.text-danger {
+    color: #c0392b !important;
+    font-size: .9rem;
+}
+
+.invalid_feild {
+    border: .13rem solid #c0392b;
+}
+
+.valid_feild {
+    border: .13rem solid green;
+}
+
+.icon {
+    font-family: "FontAwesome";
+}
+
+input {
+    width: 300px !important;
+}
+
+input:focus, textarea:focus{
+    border: .13rem solid #0078D7 !important;
+    box-shadow: none !important;
+}
+
+input::placeholder, textarea::placeholder {
+    color: #999 !important;
+}
