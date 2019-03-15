@@ -109,49 +109,31 @@ myform.addEventListener('submit', validateForm);
 
 function validateForm(event) {
 
-    var firstName = this.firstName.value;
+    var firstName = this.firstName;
 
     if (userNameValidation(firstName) == false) {
         event.preventDefault();
     }
 
-    var lastName = this.lastName.value;
+    var lastName = this.lastName;
 
     if (userNameValidation(lastName) == false) {
         event.preventDefault();
     }
 
-    var pincode = this.pincode.value;
-
-    if (pincodeValidation(pincode) == false) {
-        event.preventDefault();
-    }
-
-    var birthdate = this.birthdate.value;
-
-    if (birthdateValidation(birthdate) == false) {
-        event.preventDefault();
-    }
-
-    var email = this.email.value;
+    var email = this.email;
 
     if (emailValidation(email) == false) {
         event.preventDefault();
     }
 
-    var url = this.url.value;
-
-    if (urlValidation(url) == false) {
-        event.preventDefault();
-    }
-
-    var password = this.password.value;
+    var password = this.password;
 
     if (passwordValidation(password) == false) {
         event.preventDefault();
     }
 
-    var confirmPassword = this.confirmPassword.value;
+    var confirmPassword = this.confirmPassword;
 
     if (confirmPasswordValidation(confirmPassword) == false) {
         event.preventDefault();
