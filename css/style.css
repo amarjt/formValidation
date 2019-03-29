@@ -73,13 +73,18 @@ textarea::placeholder {
     color: #999 !important;
 }
 
-@media (max-width:768px){
-    body{
+@media (max-width:768px) {
+    body {
         height: 100%;
         padding: 5rem 0;
     }
+
     .card {
         width: 75%;
         padding: 1rem .5rem !important;
+    }
+
+    input {
+        width: 100% !important;
     }
 }
