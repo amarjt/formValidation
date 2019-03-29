@@ -1,15 +1,16 @@
 *,
 *::after,
 *::before {
-    transition: top ease 100ms; 
+    transition: top ease 300ms;
 }
 
 body {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100vw;
     height: 100vh;
-    background: linear-gradient(90deg, #0078D7, #0099BC);
+    background: linear-gradient(-45deg, #0078D7, rgb(81, 38, 160));
     font: 1rem/1.25 Open sans;
 }
 
@@ -17,8 +18,8 @@ body {
     position: relative;
 }
 
-.form-control{
-    background:transparent !important;
+.form-control {
+    background: transparent !important;
 }
 
 .label-default {
@@ -26,7 +27,7 @@ body {
     top: .85rem;
     left: 3rem;
     margin: 0 !important;
-    margin-left:3rem;
+    margin-left: 3rem;
     font-size: 1.5rem;
 }
 
@@ -34,7 +35,7 @@ body {
     position: absolute;
     padding: 0 .5rem;
     top: -.5rem;
-    margin-left:.5rem;
+    margin-left: .5rem;
     font-size: 0.85rem;
     background: #fff;
     color: #0078D7;
@@ -61,11 +62,24 @@ input {
     width: 300px !important;
 }
 
-input:focus, textarea:focus{
+input:focus,
+textarea:focus {
     border: .13rem solid #0078D7 !important;
     box-shadow: none !important;
 }
 
-input::placeholder, textarea::placeholder {
+input::placeholder,
+textarea::placeholder {
     color: #999 !important;
+}
+
+@media (max-width:768px){
+    body{
+        height: 100%;
+        padding: 5rem 0;
+    }
+    .card {
+        width: 75%;
+        padding: 1rem .5rem !important;
+    }
 }
